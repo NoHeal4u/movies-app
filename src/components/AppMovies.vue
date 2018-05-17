@@ -1,6 +1,7 @@
 <template>
 <div>
 	<p>AppMovies</p>
+	<p>{{getCounter}}</p>
 
   <div class="card" style="width: 18rem;" v-for="movie in movies">
  
@@ -20,6 +21,8 @@
 
 import { movies } from '../services/Movies'
 import MovieRow from './MovieRow.vue'
+
+import {mapGetters} from 'vuex'
 
 	export default {
 
@@ -47,8 +50,24 @@ import MovieRow from './MovieRow.vue'
 					context.movies = data
 				})
 			})
-		} //njegov nacin
+		}, //njegov nacin
+
+		computed: {
+			...mapGetters([
+	           	'getCounter'])
+		}
 
 	}
+
+	// computed: {
+	// 	magicNumber(){
+			
+	// 		return this.$store.getters.getCounter
+			
+	// 	}
+	// }
+
+	// ...mapGetters([
+	// 	'getCounter'])
 
 </script>
