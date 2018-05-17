@@ -22,7 +22,7 @@
 import { movies } from '../services/Movies'
 import MovieRow from './MovieRow.vue'
 
-import {mapGetters} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 
 	export default {
 
@@ -40,7 +40,8 @@ import {mapGetters} from 'vuex'
 
 			return {
 
-				movies: []
+				movies: [],
+				intervalId: null
 			}
 		},
 
@@ -55,6 +56,22 @@ import {mapGetters} from 'vuex'
 		computed: {
 			...mapGetters([
 	           	'getCounter'])
+		},
+
+		methods: {
+			...mapMutations([
+				'incrementCounter'])
+		},
+
+		mounted() {
+			this.intervalId = setInterval(()=>{
+				this.incrementCounter()
+			}, 1000)
+			
+		},
+
+		destroyed() {
+			clearInterval(this.intervalId)
 		}
 
 	}
